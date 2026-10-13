@@ -1,0 +1,64 @@
+name: Render Blender Film (Cloud CI)
+
+on:
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+  push:
+    branches:
+      - main
+    paths:
+      - 'scenes/**'
+      - 'cinematic_film/**'
+      - 'build_scene.py'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up System Dependencies & OpenGL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ffmpeg \
+            libgl1 \
+            libglu1-mesa \
+            libglx-mesa0 \
+            libosmesa6 \
+            libegl1 \
+            libsm6 \
+            libxrender1 \
+            libxinerama1 \
+            libxi6 \
+            libxfixes3 \
+            libxkbcommon0 \
+            xvfb \
+            wget \
+            xz-utils
+
+      - name: Download & Install Blender LTS
+        run: |
+          BLENDER_VERSION="4.3.2"
+          BLENDER_MAJOR="4.3"
+          mkdir -p /opt/blender
+          wget -q https://download.blender.org/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-x64.tar.xz -O /tmp/blender.tar.xz
+          tar -xJf /tmp/blender.tar.xz -C /opt/blender --strip-components=1
+          sudo ln -s /opt/blender/blender /usr/local/bin/blender
+          blender --version
+
+      - name: Run Scene Build & Render
+        run: |
+          mkdir -p output
+          bash scripts/render_cloud.sh
+
+      - name: Upload Final Video Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-cinematic-film
+          path: |
+            output/*.mp4
+            output/*.png
+          if-no-files-found: warn

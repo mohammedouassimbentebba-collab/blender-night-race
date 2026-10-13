@@ -1,0 +1,22 @@
+# Blender backup files
+*.blend1
+*.blend2
+*.blend@
+
+# Temporary render frames (keep final mp4 or scenes only)
+*.tmp
+*.temp
+/output/frames/
+/render_test.png
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
