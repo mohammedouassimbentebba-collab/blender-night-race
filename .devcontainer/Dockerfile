@@ -28,9 +28,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install official Blender Linux 64-bit release
-ARG BLENDER_VERSION=4.3.2
-ARG BLENDER_MAJOR=4.3
+# Install official Blender Linux 64-bit release (matching desktop version 5.2.2 LTS)
+ARG BLENDER_VERSION=5.2.2
+ARG BLENDER_MAJOR=5.2
 RUN mkdir -p /opt/blender && \
     wget -q https://download.blender.org/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-x64.tar.xz -O /tmp/blender.tar.xz && \
     tar -xJf /tmp/blender.tar.xz -C /opt/blender --strip-components=1 && \

@@ -41,8 +41,8 @@ jobs:
 
       - name: Download & Install Blender LTS
         run: |
-          BLENDER_VERSION="4.3.2"
-          BLENDER_MAJOR="4.3"
+          BLENDER_VERSION="5.2.2"
+          BLENDER_MAJOR="5.2"
           mkdir -p /opt/blender
           wget -q https://download.blender.org/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-x64.tar.xz -O /tmp/blender.tar.xz
           tar -xJf /tmp/blender.tar.xz -C /opt/blender --strip-components=1
