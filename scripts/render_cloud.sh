@@ -32,11 +32,11 @@ if [ -f "$BLEND_FILE" ]; then
     echo "🚀 Rendering cinematic animation (using $CORES threads with xvfb)..."
     xvfb-run -a $BLENDER_BIN --background "$BLEND_FILE" -t "$CORES" -a
     echo "✅ Rendering completed successfully! Check output/ directory."
-else
-    echo "ℹ️ Scene file $BLEND_FILE not found yet. Running python runner..."
-    if [ -f "cinematic_film/render_movie.py" ]; then
-        xvfb-run -a $BLENDER_BIN --background --python cinematic_film/render_movie.py
-    fi
+fi
+
+# Compile final MP4 with audio if frames were output
+if command -v python3 &>/dev/null && [ -f "scripts/compile_video.py" ]; then
+    python3 scripts/compile_video.py
 fi
 
 echo "=========================================================="

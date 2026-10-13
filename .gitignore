@@ -7,6 +7,7 @@
 *.tmp
 *.temp
 /output/frames/
+/output/preview_*.png
 /render_test.png
 
 # Python cache
