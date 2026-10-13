@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "blender": {
+      "command": "C:\\Users\\MECHERI INFORMATIQUE\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "args": [
+        "-m",
+        "blender_mcp.server"
+      ],
+      "env": {
+        "BLENDER_HOST": "localhost",
+        "BLENDER_PORT": "9876",
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}
